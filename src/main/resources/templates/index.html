@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="atletasAPP">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<title>Document</title>
+	<style>
+
+		body {
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+		}
+
+		.atletas {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+		table, .form {
+			width: 48% !important;
+		}
+
+
+	</style>
+</head>
+	<body ng-controller="atletasController">
+	<div class="container atletas">
+		<!-- modificar atleta -->
+
+		<form ng-show="showEditForm" class="form editform" name="form" novalidate>
+			<div class="form-group">
+				<input placeholder="Nombre" name="nombre" ng-model="newNombre" class="form-control" required>
+			</div>
+			<div ng-show="form.nombre.$invalid && !form.nombre.$pristine" class="alert alert-danger alert-dismissable">
+				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<Strong>El campo nombre es requerido</Strong>
+			</div>
+			<div class="form-group">
+				<input placeholder="Apellido" name="apellido" ng-model="newApellido" class="form-control" required>
+			</div>
+			<div ng-show="form.apellido.$invalid && !form.apellido.$pristine" class="alert alert-danger alert-dismissable">
+				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<Strong>El campo apellido es requerido</Strong>
+			</div>
+			<div class="form-group">
+				<input placeholder="Nacionalidad" name="nacionalidad" ng-model="newNacionalidad" class="form-control" required>
+			</div>
+			<div ng-show="form.nacionalidad.$invalid && !form.nacionalidad.$pristine" class="alert alert-danger alert-dismissable">
+				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<Strong>El campo nacionalidad es requerido</Strong>
+			</div>
+			<div class="form-group">
+				<input type="date" placeholder="Fecha de nacimiento" name="nacimiento" ng-model="nacimiento" class="form-control">
+			</div>
+			<input class="btn btn-primary" ng-click="updateAtleta()" type="submit" ng-disabled="form.$invalid" value="Modificar"  />
+		</form>
+
+		<!-- modificar atleta -->
+		<form ng-show="!showEditForm" ng-submit="addAtleta(this)" class="form" name="addAtletaForm" novalidate>
+			<div class="form-group">
+				<input placeholder="Nombre" name="nombre" ng-model="nombre" class="form-control" required>
+			</div>
+			<div ng-show="addAtletaForm.nombre.$invalid && !addAtletaForm.nombre.$pristine" class="alert alert-danger alert-dismissable">
+				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<Strong>El campo nombre es requerido</Strong>
+			</div>
+			<div class="form-group">
+				<input placeholder="Apellido" name="apellido" ng-model="apellido" class="form-control" required>
+			</div>
+			<div ng-show="addAtletaForm.apellido.$invalid && !addAtletaForm.apellido.$pristine" class="alert alert-danger alert-dismissable">
+				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<Strong>El campo apellido es requerido</Strong>
+			</div>
+			<div class="form-group">
+				<input placeholder="Nacionalidad" name="nacionalidad" ng-model="nacionalidad" class="form-control" required>
+			</div>
+			<div ng-show="addAtletaForm.nacionalidad.$invalid && !addAtletaForm.nacionalidad.$pristine" class="alert alert-danger alert-dismissable">
+				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<Strong>El campo nacionalidad es requerido</Strong>
+			</div>
+			<div class="form-group">
+				<input type="date" placeholder="Fecha de nacimiento" name="nacimiento" ng-model="nacimiento" class="form-control" required>
+			</div>
+			<div ng-show="addAtletaForm.nacimiento.$invalid && !addAtletaForm.nacimiento.$pristine" class="alert alert-danger alert-dismissable">
+				<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<Strong>El campo fecha de nacimiento es requerido</Strong>
+			</div>
+			<input class="btn btn-primary" type="submit" ng-disabled="addAtletaForm.$invalid" value="Agregar atleta" />
+		</form>
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Nacionalidad</th>
+				<th>Fecha de nacimiento</th>
+				<th>Borrar</th>
+				<th>Modificar</th>
+			</tr>
+			<tr ng-repeat="atleta in atletas track by $index">
+				<td>{{atleta.id}}</td>
+				<td>{{atleta.nombre}}</td>
+				<td>{{atleta.apellido}}</td>
+				<td>{{atleta.nacionalidad}}</td>
+				<td>{{atleta.nacimiento}}</td>
+				<td><button ng-click="removeAtleta(atleta)" class="btn btn-danger">Borrar</button></td>
+				<td><button ng-click="fillAtletaForm(atleta);hideEditForm = !hideEditForm;" class="btn btn-default">{{hideEditForm ? 'Cancelar' : 'Modificar'}}</button></td>
+			</tr>
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+	<script src="app.js"></script>
+	</body>
+</html>
