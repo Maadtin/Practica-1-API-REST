@@ -4,8 +4,17 @@ app.controller('atletasController', function ($scope, $http) {
 
 
 	$http.get("http://localhost:8080/atletas")
-		 .then(response => {console.log(response.data);
-		 	$scope.atletas = response.data});
+		 .then(response => {
+		 	let dates = response.data.map(jugador => jugador.fechaNacimiento);
+		 	let modifiedDate = dates.map(date => new Date(Date.UTC(date.year, date.monthValue, date.dayOfMonth)).toLocaleDateString());
+		 	response.data.map((jugador, i) => jugador.fechaNacimiento = modifiedDate[i].split("/").join("-"));
+		 	$scope.atletas = response.data;
+
+		 	console.log(response.data);
+
+		 });
+		 // .then(response => {console.log(response.data);
+		 // 	$scope.atletas = response.data});
 
 	$scope.addAtleta = function (form) {
 		$scope.newAtleta = {
@@ -40,7 +49,7 @@ app.controller('atletasController', function ($scope, $http) {
 				$scope.newNombre = atleta.nombre;
 				$scope.newApellido = atleta.apellido;
 				$scope.newNacionalidad = atleta.nacionalidad;
-				$scope.newNacimiento = atleta.nacimiento;
+				$scope.newNacimiento = atleta.fechaNacimiento;
 
 				$scope.updateAtleta = function () {
 					let updatedAtleta = {

@@ -22,7 +22,7 @@ public class Atleta {
 
 
 
-	@OneToMany(mappedBy = "atleta")
+	@OneToMany(mappedBy = "atleta", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Medalla> medalla = new HashSet<>();
 
