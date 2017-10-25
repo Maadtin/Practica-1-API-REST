@@ -13,7 +13,7 @@ public interface AtletaRepository extends JpaRepository<Atleta, Long>{
 
 	List<Atleta> findAtletasByNacionalidadEquals(String nacionalidad);
 
-	List<Atleta> findAtletasByFechaNacimientoBefore(LocalDate date);
+	List<Atleta> findByFechaNacimientoBefore(LocalDate date);
 
 	Atleta findAtletaByNombre(String nombre);
 

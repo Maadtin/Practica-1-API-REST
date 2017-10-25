@@ -17,7 +17,7 @@ public class Atleta {
 	private String apellido;
 	private String nacionalidad;
 
-	@JsonIgnore
+
 	private LocalDate fechaNacimiento;
 
 

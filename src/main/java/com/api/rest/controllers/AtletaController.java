@@ -52,7 +52,7 @@ public class AtletaController {
 	// Devolver todos los atletas que sean menor a la fecha por parametro
 	@GetMapping("/birthdate/{date}")
 	public List<Atleta> getAtletaByBirthDateLowerThan(@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
-		return atletaRepository.findAtletasByFechaNacimientoBefore(date);
+		return atletaRepository.findByFechaNacimientoBefore(date);
 	}
 
 	// Devolver todos los atletas agrupados por nacionalidad
